@@ -33,13 +33,17 @@ contract StarNotary is ERC721Token {
     // Creates a new Star (struct), and maps it to a TokenID before minting the token.
     function createStar(string _name, uint256 _tokenId, string _dec, string _mag, string _ra, string _story) public { 
         Star memory newStar;
+        // Create unique hash to represent the coordinates.
+        newStar.coordinatesHash = sha256(abi.encodePacked(_dec,_mag,_ra));
+        if(starCoordinates[newStar.coordinatesHash] == true) {
+            revert('This star already exists.');
+        } else {
         newStar.name = _name;
         newStar.story = _story;
         newStar.coordinates.dec = _dec;
         newStar.coordinates.mag = _mag;
         newStar.coordinates.ra = _ra;
-        // Create unique hash to represent the coordinates.
-        newStar.coordinatesHash = sha256(abi.encodePacked(_dec,_mag,_ra));
+        
         
         // Make sure this coordinate combination gets registered
         starCoordinates[newStar.coordinatesHash] = true;
@@ -47,6 +51,7 @@ contract StarNotary is ERC721Token {
         tokenIdToStarInfo[_tokenId] = newStar;
 
         ERC721Token.mint(_tokenId);
+        }
     }
     
     // Check if the star already exists

@@ -6,7 +6,7 @@ contract('StarNotary', accounts => {
     const ra = 'ra_32.33';
     const dec = 'dec_0.23';
     const mag = 'mag_3.22';
-    const tokenID = 1;
+    const tokenId = 1;
 
     beforeEach(async function() { 
         this.contract = await StarNotary.new({from: accounts[0]})
@@ -78,6 +78,16 @@ contract('StarNotary', accounts => {
                 const balanceAfterUser2BuysStar = web3.eth.getBalance(user2)
 
                 assert.equal(balanceOfUser2BeforeTransaction.sub(balanceAfterUser2BuysStar), starPrice)
+            })
+        })
+
+        describe('get owner address using tokenId', () => {
+            beforeEach(async function () { 
+                // We need to give it a different tokenId and different coordinates otherwise it revents
+                await this.contract.createStar(name, 4, 'dec_987.23', mag, ra, story, {from: accounts[0]});
+            })
+            it('can retrieve the owner address of a star using its tokenId', async function () {
+                assert.equal(await this.contract.getOwner(4), accounts[0]);
             })
         })
     })

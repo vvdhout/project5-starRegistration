@@ -101,9 +101,13 @@ contract StarNotary is ERC721Token {
     }
     
     // Get star information using a tokenID 
-    function tokenIdToStarInfo(uint256 _tokenID) public view returns (string _name, string _story, string _ra, string _dec, string _mag) {
-        Star memory theStar = tokenIdToStarInfo[_tokenID];
+    function tokenIdToStarInfo(uint256 _tokenId) public view returns (string _name, string _story, string _ra, string _dec, string _mag) {
+        Star memory theStar = tokenIdToStarInfo[_tokenId];
         return(theStar.name, theStar.story, theStar.coordinates.ra, theStar.coordinates.dec, theStar.coordinates.mag);
+    }
+
+    function getOwner(uint256 _tokenId) public view returns (address _owner) {
+        return tokenToOwner[_tokenId];
     }
 
 }

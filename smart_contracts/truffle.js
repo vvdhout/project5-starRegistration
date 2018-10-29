@@ -1,4 +1,4 @@
-// const HDWalletProvider = require('truffle-hdwallet-provider-master');
+// const HDWalletProvider = require('truffle-hdwallet-provider');
 
 // const mnemonic = "area ski undo motor clerk access table net ticket crash company during"; 
 

@@ -1,19 +1,29 @@
 const StarNotary = artifacts.require('StarNotary')
 
 contract('StarNotary', accounts => { 
+    const name = 'Awesome Star!';
+    const story = 'This is the star story.';
+    const ra = 'ra_32.33';
+    const dec = 'dec_0.23';
+    const mag = 'mag_3.22';
+    const tokenID = 1;
 
     beforeEach(async function() { 
         this.contract = await StarNotary.new({from: accounts[0]})
     })
     
     describe('can create a star', () => { 
-        it('can create a star and get its name', async function () { 
-            let tokenId = 1
+        let tokenId = 1
+        it('can create a star', async function () { 
 
-            await this.contract.createStar('Awesome Star!', tokenId, {from: accounts[0]})
+            await this.contract.createStar(name, tokenId, dec, mag, ra, story, {from: accounts[0]})
 
-            assert.equal(await this.contract.tokenIdToStarInfo(tokenId), 'Awesome Star!')
+             // test tokenIdToStarInfo() method
+            it('get its data using tokenID', async function() { 
+                assert.equal(await this.contract.tokenIdToStarInfo(tokenId), [name, story, ra, dec, mag]);
+            });
         })
+        
     })
 
     describe('buying and selling stars', () => { 
@@ -25,7 +35,7 @@ contract('StarNotary', accounts => {
         let starPrice = web3.toWei(.01, "ether")
 
         beforeEach(async function () {
-            await this.contract.createStar('awesome star', starId, {from: user1})
+            await this.contract.createStar(name, starId, dec, mag, ra, story, {from: user1})
         })
 
         describe('user1 can sell a star', () => { 

@@ -105,4 +105,5 @@ contract StarNotary is ERC721Token {
         Star memory theStar = tokenIdToStarInfo[_tokenID];
         return(theStar.name, theStar.story, theStar.coordinates.ra, theStar.coordinates.dec, theStar.coordinates.mag);
     }
+
 }

@@ -2,6 +2,14 @@
 
 This is the end project(5) for the first term of the Udacity blockchain developer nanodegree.
 
+You can run the application from command prompt as such:
+
+```
+node run.js
+```
+This will launch the app at localhost:8000, where you can interact with the SC deployed on the Rinkeby network.
+
+
 ### Transaction Hash
 ```
 0xc2d9883d63f76635cc97483163d7705958ac4f5507123afde96a2e13b1b52dfd

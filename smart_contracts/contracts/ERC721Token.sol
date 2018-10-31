@@ -59,7 +59,6 @@ contract ERC721Token is ERC721 {
         transferFromHelper(_from, _to, _tokenId);
     }
 
-
     /// @notice Transfers the ownership of an NFT from one address to another address
     /// @dev Throws unless `msg.sender` is the current owner, an authorized
     ///  operator, or the approved address for this NFT. Throws if `_from` is
@@ -73,7 +72,7 @@ contract ERC721Token is ERC721 {
     /// @param _tokenId The NFT to transfer
     /// @param data Additional data with no specified format, sent in call to `_to`
     function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes data) external payable { 
-        // transferFrom(_from, _to, _tokenId);
+        transferFromHelper(_from, _to, _tokenId);
     }
 
     /// @notice Transfers the ownership of an NFT from one address to another address
@@ -83,7 +82,7 @@ contract ERC721Token is ERC721 {
     /// @param _to The new owner
     /// @param _tokenId The NFT to transfer
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) external payable { 
-        // transferFrom(_from, _to, _tokenId);
+        transferFromHelper(_from, _to, _tokenId);
     }
 
     function transferFromHelper(address _from, address _to, uint256 _tokenId) internal { 

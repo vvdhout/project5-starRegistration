@@ -1,6 +1,8 @@
 pragma solidity ^0.4.23;
 
 import './ERC721Token.sol';
+// import "https://github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+// import "../../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
 
 contract StarNotary is ERC721Token { 
     address public owner;
@@ -56,10 +58,10 @@ contract StarNotary is ERC721Token {
     
     // Check if the star already exists
     function checkIfStarExists(string _dec, string _mag, string _ra) public view returns (bool _existence) {
-        if(!starCoordinates[sha256(abi.encodePacked(_dec,_mag,_ra))]) {
-            return(false);
-        } else {
+        if(starCoordinates[sha256(abi.encodePacked(_dec,_mag,_ra))] == true) {
             return(true);
+        } else {
+            return(false);
         }
     }
 

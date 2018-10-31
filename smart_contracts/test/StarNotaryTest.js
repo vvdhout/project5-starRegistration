@@ -11,7 +11,7 @@ contract('StarNotary', accounts => {
     beforeEach(async function() { 
         this.contract = await StarNotary.new({from: accounts[0]})
     })
-    
+
     describe('can create a star', () => { 
         let tokenId = 1
         it('can create a star', async function () { 
@@ -24,6 +24,13 @@ contract('StarNotary', accounts => {
             });
         })
         
+    })
+
+    describe('check if star exists', () => {
+        it('can check if a star exists', async function() {
+            await this.contract.createStar(name, 65, "543", mag, ra, story, {from: accounts[0]})
+            assert.equal(await this.contract.checkIfStarExists("543", mag, ra), true);
+        })
     })
 
     describe('buying and selling stars', () => { 
